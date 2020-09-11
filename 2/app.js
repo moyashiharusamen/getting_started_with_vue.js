@@ -23,4 +23,8 @@ var vm = new Vue({
     }
 });
 
-// vm.$mount('#app');
+vm.$watch(() => {
+    return this.items[0].quantity
+}, (quantity) => {
+    console.log(quantity);
+})
