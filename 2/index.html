@@ -6,9 +6,11 @@
 <body>
 <div id="app">
     <p>{{ items[0].name }}: {{ items[0].price }} x {{ items[0].quantity }}</p>
+
+    <button id="b-button" v-bind:title="loggedInButton" v-bind:disabled="!canBy">購入</button>
 </div>
 
-<!-- <script>
+<script>
 // console.assert(typeof Vue !== 'undefined');
 
 // new Vue({
@@ -26,6 +28,14 @@
 // });
 
 // vm.$mount('#app');
-</script> -->
+
+var vm = new Vue({
+    el: "#b-button",
+    data: {
+        loggedInButton: "ログイン済みのため購入できます。",
+        canBy: false
+    }
+})
+</script>
 <script src="app.js"></script>
 </body>
