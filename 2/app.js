@@ -20,6 +20,13 @@ var vm = new Vue({
     el: '#app',
     data: {
         items: items
+    },
+    filters: {
+        numberWidthDelimiter(val) {
+            if(!val) return;
+
+            return val.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+        }
     }
 });
 
