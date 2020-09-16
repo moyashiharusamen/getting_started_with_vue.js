@@ -23,7 +23,7 @@ var vm = new Vue({
     },
     filters: {
         numberWithDelimiter(val) {
-            if(!val) return;
+            if(!val) return '0';
 
             return val.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
         }
