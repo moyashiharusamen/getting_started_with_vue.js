@@ -6,8 +6,8 @@
 <body>
 <div id="app">
     <p>{{ items[0].name }}: {{ items[0].price }} x {{ items[0].quantity }}</p>
-    <p v-if="canBuy">小計: {{ totalPrice | numberWithDelimiter }}円</p>
-    <p v-if="canBuy">合計（税込）: {{ totalPriceWithTax | numberWithDelimiter }}円</p>
+    <p>小計: {{ totalPrice | numberWithDelimiter }}円</p>
+    <p>合計（税込）: {{ totalPriceWithTax | numberWithDelimiter }}円</p>
 
     <!-- 属性値に応じて、表示を出し分けする -->
     <p v-show="!canBuy" style="color:rgba(250, 80, 80, 0.829);">
