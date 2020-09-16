@@ -27,6 +27,16 @@ var vm = new Vue({
 
             return val.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
         }
+    },
+    computed: {
+        totalPrice() {
+            return this.items.reduce((sum, item) =>{
+                return sum + (item.price + item.quantity)
+            }, 0)
+        },
+        totalPriceWithTax() {
+            return Math.floor(this.totalPrice * 1.08)
+        }
     }
 });
 
