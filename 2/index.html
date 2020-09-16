@@ -5,9 +5,14 @@
 </head>
 <body>
 <div id="app">
+    <ul>
+        <li v-for="item in items" :key="item.name">
+            {{ item.name }}の個数: <input type="number" v-on:input="item.quantity = $event.target.value" :value="item.quantity" min="0">
+        </li>
+    </ul>
+
     <div :style="errorMessageStyle">
         <ul>
-            <!-- 各商品の単価と購入個数をリスト表示する -->
             <li v-for="item in items" :key="item.name">
                 {{ item.name }}: {{ item.price }} x {{ item.quantity }} = {{ item.price * item.quantity | numberWithDelimiter }}円
             </li>
