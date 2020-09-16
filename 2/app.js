@@ -40,6 +40,17 @@ var vm = new Vue({
         },
         canBuy() {
             return this.totalPrice >= 1000
+        },
+        errorMessageClass() {
+            return {
+                error: !this.canBuy
+            }
+        },
+        errorMessageStyle() {
+            return  {
+                border: this.canBuy ? '' : '1px solid red',
+                color: this.canBuy ? '' : 'red'
+            }
         }
     }
 });
