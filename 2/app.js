@@ -22,7 +22,7 @@ var vm = new Vue({
         items: items
     },
     filters: {
-        numberWidthDelimiter(val) {
+        numberWithDelimiter(val) {
             if(!val) return;
 
             return val.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
@@ -31,10 +31,11 @@ var vm = new Vue({
     computed: {
         totalPrice() {
             return this.items.reduce((sum, item) =>{
-                return sum + (item.price + item.quantity)
+                return sum + (item.price * item.quantity)
             }, 0)
         },
         totalPriceWithTax() {
+            // 算出プロパティに依存した算出プロパティも定義できる
             return Math.floor(this.totalPrice * 1.08)
         }
     }

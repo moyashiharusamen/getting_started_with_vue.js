@@ -5,14 +5,9 @@
 </head>
 <body>
 <div id="app">
-    <p>{{ items[0].price * items[0].quantity }}</p>
-
-    <button id="b-button" v-bind:title="loggedInButton" v-bind:disabled="!canBy">購入</button>
-
     <p>{{ items[0].name }}: {{ items[0].price }} x {{ items[0].quantity }}</p>
-    <p>フィルター処理例 {{1000 | numberWidthDelimiter}}</p>
-
-    <p>合計金額: {{ totalPrice }}</p>
+    <p>小計: {{ totalPrice | numberWithDelimiter }}円</p>
+    <p>合計（税込）: {{ totalPriceWithTax | numberWithDelimiter }}円</p>
 </div>
 
 <script>
@@ -34,13 +29,13 @@
 
 // vm.$mount('#app');
 
-var vm = new Vue({
-    el: "#b-button",
-    data: {
-        loggedInButton: "ログイン済みのため購入できます。",
-        canBy: false
-    }
-})
+// var vm = new Vue({
+//     el: "#b-button",
+//     data: {
+//         loggedInButton: "ログイン済みのため購入できます。",
+//         canBy: false
+//     }
+// })
 </script>
 <script src="app.js"></script>
 </body>
