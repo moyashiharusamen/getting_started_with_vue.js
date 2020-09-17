@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+<title>はじめてのVue.js | 2 Vue.jsでフック</title>
+<script src="https://unpkg.com/vue@2.5.17"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{ count }}</p>
+</div>
+
+<script>
+const vm  = new Vue({
+    el: "#app",
+    data() {
+        return {
+            count: 0,
+            timerId: null
+        }
+    },
+    created() {
+        console.log('created');
+
+        // データを取得できる
+        console.log(this.count);
+
+        // DOM 要素が紐付いていないので、 undefiner
+        console.log(this.$el);
+
+        // タイマー処理を開始する
+        this.timerId = setInterval(() => {
+            this.count += 1;
+        }, 1000)
+    },
+    mounted() {
+        console.log('mounted');
+
+        // DOM 要素が紐付いている
+        console.log(this.$el);
+    },
+    beforeDestroy() {
+        console.log('beforeDestroy');
+
+        // タイマーの後始末を行う
+        clearInterval(this.timerId);
+    }
+})
+</script>
+</body>
