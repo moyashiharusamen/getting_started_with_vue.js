@@ -7,7 +7,6 @@
 <div id="app">
     <ul>
         <li v-for="item in items" :key="item.name">
-            <!-- v-onディレクティブの代わりにv-modelを使う -->
             {{ item.name }}の個数: <input type="number" v-model="item.quantity" min="0">
         </li>
     </ul>
@@ -25,6 +24,9 @@
             {{ 1000 | numberWithDelimiter }}円以上からご購入いただけます。
         </p>
     </div>
+
+    <!-- ボタンが押されたらメソッドを呼び出す -->
+    <button :disabled="!canBuy" @click="doBuy">購入</button>
 </div>
 <script src="app.js"></script>
 </body>

@@ -28,6 +28,16 @@ var vm = new Vue({
             return val.toString().replace(/(\d)(?=(\d{3})+$)/g, '$1,')
         }
     },
+    methods: {
+        doBuy() {
+            // 本来はここで、サーバーとの通信を行う
+            alert(`${this.totalPriceWithTax}円のお買い上げ！`);
+
+            this.items.forEach((item) => {
+                item.quantity = 0;
+            })
+        }
+    },
     computed: {
         totalPrice() {
             return this.items.reduce((sum, item) =>{
