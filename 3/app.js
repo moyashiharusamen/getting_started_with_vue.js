@@ -1,12 +1,7 @@
-Vue.component('list-item', {
-    template: '<li>{{ contents }}</li>',
-    data() {
-        return {
-            contents: 'bar'
-        }
-    }
+Vue.component('fruits-list-title', {
+    template: '<h1>フルーツ一覧</h1>'
 })
 
 new Vue({
-    el: '#example'
+    el: '#fruits-list'
 })
