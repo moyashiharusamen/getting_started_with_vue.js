@@ -1,3 +1,13 @@
+Vue.component('fruits-list', {
+    template: `
+    <div>
+        <fruits-list-title></fruits-list-title>
+        <fruits-list-desc></fruits-list-desc>
+        <fruits-list-table></fruits-list-table>
+    </div>
+    `
+})
+
 Vue.component('fruits-list-title', {
     template: '<h1>フルーツ一覧</h1>'
 })
@@ -34,5 +44,5 @@ Vue.component('fruits-list-table', {
 })
 
 new Vue({
-    el: '#fruits-list'
+    el: '#main'
 })
