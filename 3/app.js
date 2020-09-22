@@ -7,10 +7,18 @@
 //     }
 // })
 
-Vue.component('fruits-list-title', {
-    template: '#fruits-list-title'
+Vue.component('input-date-with-today', {
+    render(createElement) {
+        return createElement(
+            'input',
+            {
+                attrs: {
+                    type: 'date',
+                    value: new Date().toISOString().substring(0, 10)
+                }
+            }
+        )
+    }
 })
 
-new Vue({
-    el: '#fruits-list'
-})
+new Vue({ el: '#app' })
