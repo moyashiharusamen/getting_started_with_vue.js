@@ -21,4 +21,14 @@ Vue.component('input-date-with-today', {
     }
 })
 
+// data を関数の return で返している
+Vue.component('simple-counter', {
+    template: '<h1>フルーツ一覧</h1>',
+    data() {
+        return {
+            fruits: ['りんご', 'みかん']
+        }
+    }
+})
+
 new Vue({ el: '#app' })
