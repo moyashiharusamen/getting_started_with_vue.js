@@ -16,7 +16,15 @@
 </div>
 
 <script type="text/x-template" id="user-list">
-    <div>ユーザー一覧ページです</div>
+    <div>
+        <div class="loading" v-if="loading">読み込み中...</div>
+        <div class="error" v-if="error">{{ error }}</div>
+
+        <!-- users がロードされたら各ユーザーの名前を表示する -->
+        <div v-for="user in users" :key="user.id">
+            <h2>{{ user.name }}</h2>
+        </div>
+    </div>
 </script>
 <script src="app2.js"></script>
 </body>
