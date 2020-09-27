@@ -11,6 +11,7 @@
         <!-- router-link によるナビゲーション定義 -->
         <router-link to="/top">トップページ</router-link>
         <router-link to="/users">ユーザー一覧ページ</router-link>
+        <router-link to="/users/new?redirect=true">新規ユーザー登録</router-link>
     </nav>
     <router-view></router-view>
 </div>
@@ -34,6 +35,29 @@
     <div v-if="user">
         <h2>{{ user.name }}</h2>
         <p>{{ user.description }}</p>
+    </div>
+</div>
+</script>
+<script type="text/x-template" id="user-create">
+<div>
+    <div class="sending" v-if="sending">Sending...</div>
+
+    <div>
+        <h2>新規ユーザー登録</h2>
+        <div>
+            <label for="name">名前：</label>
+            <input type="text" id="name" v-model="user.name">
+        </div>
+        <div>
+            <label for="description">説明文：</label>
+            <textarea id="description" v-model="user.description"></textarea>
+        </div>
+
+        <div class="error" v-if="error">{{ error }}</div>
+
+        <div>
+            <input type="button" @click="createUser" value="送信">
+        </div>
     </div>
 </div>
 </script>

@@ -99,6 +99,61 @@ const UserDetail = {
     }
 }
 
+const postUser = (params, callback) => {
+    setTimeout(() => {
+        params.id = userData.length + 1;
+        userData.push(params);
+        callback(null, params);
+    }, 1000)
+};
+
+const UserCreate = {
+    template: '#user-create',
+    data() {
+        return {
+            sending: false,
+            user: this.defaultUser(),
+            error: null
+        }
+    },
+
+    methods: {
+        defaultUser() {
+            return {
+                name: '',
+                description: ''
+            }
+        },
+
+        createUser() {
+            if (this.user.name.trim() === '') {
+                this.error = 'Name は必須です';
+
+                return;
+            }
+
+            if (this.user.description.trim() === '') {
+                this.error = 'Description は必須です'
+
+                return;
+            }
+
+            postUser(this.user, ((err, user) => {
+                this.sending = false;
+
+                if (err) {
+                    this.error = err.toString();
+                } else {
+                    this.error = null;
+                    this.user = this.defaultUser();
+                    alert('新規ユーザーが登録されました');
+                    this.$router.push('/users');
+                }
+            }).bind(this))
+        }
+    }
+}
+
 const router = new VueRouter({
     routes: [
         {
@@ -112,6 +167,10 @@ const router = new VueRouter({
             component: UserList
         },
         { // ルート定義の追加
+            path: '/users/new',
+            component: UserCreate
+        },
+        {
             path: '/users/:userId',
             component: UserDetail
         }
