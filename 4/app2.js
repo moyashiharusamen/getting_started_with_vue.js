@@ -154,6 +154,55 @@ const UserCreate = {
     }
 }
 
+const Auth = {
+    login(email, pass, cb) {
+        // ダミーデータを使った疑似ログイン
+        setTimeout(() => {
+            if (email === 'vue@example.com' && pass === 'vue') {
+                // ログイン成功時はローカルストレージに token を保存する
+                localStorage.token = Math.random().toString(36).substring(7);
+
+                if (cb) { cb(true) };
+            } else {
+                if (cb) { cb(false) };
+            }
+        }, 0)
+    },
+
+    logout() {
+        delete localStorage.token;
+    },
+
+    loggedIn() {
+        // ローカルストレージに token があればログイン状態とみなす
+        return !!localStorage.token;
+    }
+};
+
+const Login = {
+    template: "#login",
+    data() {
+        return {
+            email: 'vue@example.com',
+            pass: '',
+            error: false
+        }
+    },
+    
+    methods: {
+        login() {
+            Auth.login(this.email, this.pass, ((loggedIn) => {
+                if (!loggedIn) {
+                    this.error = true;
+                } else {
+                    // redirect パラメータがついている場合はそのパスに遷移
+                    this.$route.replace(this.$route.query.redirect || '/');
+                }
+            }).bind(this))
+        }
+    }
+}
+
 const router = new VueRouter({
     routes: [
         {
@@ -166,18 +215,46 @@ const router = new VueRouter({
             path: '/users',
             component: UserList
         },
-        { // ルート定義の追加
+        {
             path: '/users/new',
-            component: UserCreate
+            component: UserCreate,
+            beforeEnter(to, from, next) {
+                // 認証されていない状態でアクセスした時は login ページに遷移する
+                if (!Auth.loggedIn()) {
+                    next({
+                        path: '/login',
+                        query: { redirect: to.fullPath }
+                    })
+                } else {
+                    // 認証済みであればそのまま新規ユーザー作成ページへ進む
+                    next();
+                }
+            }
         },
         {
             path: '/users/:userId',
             component: UserDetail
+        },
+        {
+            path: '/login',
+            component: Login
+        },
+        {
+            path: '/logout',
+            beforeEnter(to, from, next) {
+                Auth.logout();
+                next('/')
+            }
         }
     ]
 });
 
 const app = new Vue({
     el: '#app',
+    data() {
+        return {
+            Auth: Auth
+        }
+    },
     router: router
 })
