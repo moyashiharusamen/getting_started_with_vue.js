@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+<title>はじめてのVue.js | 5 Vue.jsの高度の機能</title>
+<script src="https://unpkg.com/vue@2.5.17"></script>
+</head>
+<body>
+
+<div id="app">
+    <my-page>
+        <!-- name 属性値が header の <slot> と書き換わるコンテンツ -->
+        <h1 slot="header">This is my page</h1>
+
+        <!-- 単一スロットと置き換わるコンテンツ -->
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <!-- name 属性値が footer の <slot> と置き換わるコンテンツ -->
+        <p slot="footer">This is footer</p>
+    </my-page>
+</div>
+
+<script src="app.js"></script>
+</body>
